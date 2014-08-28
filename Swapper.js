@@ -23,6 +23,7 @@
 	 *	 - Add a parameter to use or not requestAnimationFrame.
 	 *	 - Use parameters instead of strings for the classes used by swapper.js
 	 *	   and add functions to change them programmatically (?).
+	 *	 - Add a method to remove elements from the set.
 	 *
 	 **************************************************************************/
 
