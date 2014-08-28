@@ -3,7 +3,7 @@
 
 	/***************************************************************************
 	 *	swapper.js:
-	 *	Class to help you toggle the visibility of parts of your web project. 
+	 *	A JS class to help you toggle the visibility of parts of your web project.
 	 *
 	 *	By Dani Gámez Franco, http://gmzcodes.com
 	 *	Licensed under MIT.
