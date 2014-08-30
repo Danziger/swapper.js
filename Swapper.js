@@ -34,7 +34,7 @@
 				IDs = [];
 				
 				for(var i=0, L=elements.length; i<L; ++i) {
-					var id = elements[i].id
+					var id = elements[i].id;
 					id.length>0 && IDs[IDs.length] = id;
 				}
 			}
