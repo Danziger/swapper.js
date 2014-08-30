@@ -23,20 +23,20 @@
 	// CONSTRUCTOR & (PUBLIC) VARIABLES ////////////////////////////////////////
 	
 	var Swapper = function(IDs, currentIndex, defaultIndex, anchorMode) {
-		this.pagesIDs=new Array();
-		this.pagesDOM=new Array();
+		this.pagesIDs = [];
+		this.pagesDOM = [];
 		this.pagesCount=0;
 		
 		if(typeof IDs === "string"){
 			if(IDs==="autoMODE"){ // Automatically seach for .pageMe elements.
 				var elements=document.getElementsByClassName("pageMe");
 				
-				IDs = new Array();
+				IDs = [];
 				
 				for(var i=0, L=elements.length; i<L; ++i)
-					elements[i].id.length>0 && IDs.push(elements[i].id);
+					elements[i].id.length>0 && IDs[IDs.length] = elements[i].id;
 			}
-			else IDs=new Array(IDs); // Just one element added.
+			else IDs = [IDs]; // Just one element added.
 		}
 		
 		if(Object.prototype.toString.call( IDs ) === "[object Array]")
@@ -87,8 +87,8 @@
 			var element=document.getElementById(ID);
 			
 			if(element){
-				this.pagesIDs.push(ID);
-				this.pagesDOM.push(element);
+				this.pagesIDs[pagesIDs.length] = ID;
+				this.pagesDOM[pagesDOM.length] = element;
 
 				++this.pagesCount;
 
@@ -170,7 +170,7 @@
 				if(this.currentIndex >=0)
 					this.pagesDOM[this.currentIndex].classList.remove("currentPage");
 					
-				this.pagesDOM[index].classList.add("currentPage");
+				this.pagesDOM[index].className += " currentPage";
 				this.currentIndex=index;
 			}
 		}
@@ -203,7 +203,7 @@
 				}
 			});
 			
-			deadElement.classList.add("deadPage");		
+			deadElement.className += " deadPage";		
 		}
 	};
 	
