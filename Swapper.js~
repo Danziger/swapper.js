@@ -146,9 +146,9 @@
 		else throw "Swapper.js (ERR) - Invalid ID.";
 	};
 
-	Swapper.prototype.setDefaultByIndex=function(index) {
-		if(typeof index == "number" && this.pagesCount > 0)
-			this.defaultIndex = Math.max( Math.min(index, this.pagesCount-1), 0);
+	Swapper.prototype.setDefaultByIndex=function(defaultIndex) {
+		if(typeof defaultIndex == "number" && this.pagesCount > 0)
+			this.defaultIndex = Math.max( Math.min(defaultIndex, this.pagesCount-1), 0);
 		else
 			this.defaultIndex = null;
 	};
