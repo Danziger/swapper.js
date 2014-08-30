@@ -8,7 +8,7 @@
 	 *	By Dani Gámez Franco, http://gmzcodes.com
 	 *	Licensed under MIT.
 	 *
-	 *	Version: 1.1.1
+	 *	Version: 1.1.2
 	 *	Last Update: 2014-08-30
 	 *
 	 *	NOTE:
@@ -17,13 +17,6 @@
 	 *	instead or adapt your project to work with the default value.
 	 *	
 	 *	Same thing for "deadPage" and "pageMe".
-	 *	
-	 *	TO-DO:
-	 *	 - Add a callback to call on transition end (with option to use delegation).
-	 *	 - Add a parameter to use or not requestAnimationFrame.
-	 *	 - Use parameters instead of strings for the classes used by swapper.js
-	 *	   and add functions to change them programmatically (?).
-	 *	 - Add a method to remove elements from the set.
 	 *
 	 **************************************************************************/
 
