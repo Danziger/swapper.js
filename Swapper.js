@@ -8,7 +8,7 @@
 	 *	By Dani Gámez Franco, http://gmzcodes.com
 	 *	Licensed under MIT.
 	 *
-	 *	Version: 1.1.2
+	 *	Version: 1.1.3
 	 *	Last Update: 2014-08-30
 	 *
 	 *	NOTE:
@@ -33,8 +33,10 @@
 				
 				IDs = [];
 				
-				for(var i=0, L=elements.length; i<L; ++i)
-					elements[i].id.length>0 && IDs[IDs.length] = elements[i].id;
+				for(var i=0, L=elements.length; i<L; ++i) {
+					var id = elements[i].id
+					id.length>0 && IDs[IDs.length] = id;
+				}
 			}
 			else IDs = [IDs]; // Just one element added.
 		}
