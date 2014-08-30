@@ -8,7 +8,7 @@
 	 *	By Dani Gámez Franco, http://gmzcodes.com
 	 *	Licensed under MIT.
 	 *
-	 *	Version: 1.1.3
+	 *	Version: 1.1.4
 	 *	Last Update: 2014-08-30
 	 *
 	 *	NOTE:
@@ -35,7 +35,7 @@
 				
 				for(var i=0, L=elements.length; i<L; ++i) {
 					var id = elements[i].id;
-					id.length>0 && IDs[IDs.length] = id;
+					id.length>0 && (IDs[IDs.length] = id);
 				}
 			}
 			else IDs = [IDs]; // Just one element added.
@@ -89,8 +89,8 @@
 			var element=document.getElementById(ID);
 			
 			if(element){
-				this.pagesIDs[pagesIDs.length] = ID;
-				this.pagesDOM[pagesDOM.length] = element;
+				this.pagesIDs[this.pagesIDs.length] = ID;
+				this.pagesDOM[this.pagesDOM.length] = element;
 
 				++this.pagesCount;
 
