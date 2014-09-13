@@ -12,7 +12,7 @@
 	 *	Last Update: 2014-09-13
 	 *
 	 *	NOTE about classes:
-	 *	The className attribute can be changed to use custom class names, but
+	 *	The classNames attribute can be changed to use custom class names, but
 	 *  it will be changed in the prototype, so all instances of Swapper will be
 	 *  affected.
 	 *
