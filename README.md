@@ -60,34 +60,34 @@ Attributes
 
 ###PUBLIC
 
-####.pagesIDs
+#####.pagesIDs
 Array of Strings `SwapperInstance.pagesIDs`
 
-####.pagesDOM
+#####.pagesDOM
 Array of DOM elements `SwapperInstance.pagesDOM`
 
-####.buttonsIDs
+#####.buttonsIDs
 Array of Strings `SwapperInstance.buttonsIDs`
 
-####.buttonsDOM
+#####.buttonsDOM
 Array of DOM elements `SwapperInstance.buttonsDOM`
 
-####.callbacks
+#####.callbacks
 Object `SwapperInstance.callbacks = {DOMelementID: function callback, ...}`
 
-####.callbacksEnabled
+#####.callbacksEnabled
 Boolean `SwapperInstance.callbacksEnabled`
 
-####.pagesCount
+#####.pagesCount
 Integer `SwapperInstance.pagesCount`
 
-####.masterProperty
+#####.masterProperty
 String of CSS property `SwapperInstance.masterProperty`
 
-####.transitionEvent (in prototype)
+#####.transitionEvent (in prototype)
 String of transition end event supported  `SwapperInstance.transitionEvent` / `Swapper.prototype.transitionEvent`
 
-####.classNames (in prototype)
+#####.classNames (in prototype)
 Object `SwapperInstance.classNames` / `Swapper.prototype.classNames = {defaultClassName: currentClassName, ...}`
 
 
@@ -125,7 +125,7 @@ Creates a new instance of the Swapper class to manage all the _pages_ that match
 
 ###AUXILIAR (_PRIVATE_)
 
-####._normalizeIDs (aux. method)
+#####._normalizeIDs (aux. method)
 `SwapperInstance._normalizeIDs(IDs, className)`
 
 Returns the `IDs` parameter normalized as an Array of Strings (or an empty Array).
@@ -288,11 +288,11 @@ No arguments. It clears (set to null) the `defaultIndex` so that we disable the 
 
 ####Loader-Related Methods
 
-#####`.removeLoaderByID`
+#####.removeLoaderByID
 `SwapperInstance.removeLoaderByID(ID)`
 
 
-#####`.removeLoaderByIndex`
+#####.removeLoaderByIndex
 `SwapperInstance.removeLoaderByIndex(index)`
 
 
