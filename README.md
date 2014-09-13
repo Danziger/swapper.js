@@ -58,7 +58,7 @@ By default, the CSS property whose transition end indicates when to call the cal
 Attributes
 ----------
 
-###Public
+###PUBLIC
 
 ####.pagesIDs
 Array of Strings `SwapperInstance.pagesIDs`
@@ -97,7 +97,7 @@ Object `SwapperInstance.classNames` / `Swapper.prototype.classNames = {defaultCl
 Methods
 -------
 
-###Constructor
+###CONSTRUCTOR
 `SwapperInstance = new Swapper(IDs, currentIndex, defaultIndex, options)`
 
 Creates a new instance of the Swapper class to manage all the _pages_ that match the `IDs` selector/s. You can also specify the current one providing the `currentIndex` argument and the default one with the `defaultIndex` argument. The last argument indicates some extra options that are not so commonly used.
@@ -123,9 +123,9 @@ Creates a new instance of the Swapper class to manage all the _pages_ that match
 
 
 
-###Auxiliar (_privates_)
+###AUXILIAR (_PRIVATE_)
 
-####_normalizeIDs (aux. method)
+####._normalizeIDs (aux. method)
 `SwapperInstance._normalizeIDs(IDs, className)`
 
 Returns the `IDs` parameter normalized as an Array of Strings (or an empty Array).
@@ -138,11 +138,11 @@ Returns the `IDs` parameter normalized as an Array of Strings (or an empty Array
 
 
 
-###Public
+###PUBLIC
 
 ####Page-Related Methods
 
-#####addPage
+#####.addPage
 `SwapperInstance.addPage(ID)`
 
 Add a new _page_ to the current set that matches the `ID` selector.
@@ -152,7 +152,7 @@ Add a new _page_ to the current set that matches the `ID` selector.
 | String | `ID` | ID of one _page_ to add to the current set.
 
 
-#####addPages
+#####.addPages
 `SwapperInstance.addPages(IDs)`
 
 Add to the current set all the _pages_ that match the `IDs` selectors.
@@ -162,15 +162,15 @@ Add to the current set all the _pages_ that match the `IDs` selectors.
 | Array | `IDs` | Array of Strings of the IDs of the _pages_ to add to the current set. In this case, it can not be a single String and there is no special value to search the elements automatically.
 
 
-#####removeByID
+#####.removeByID
 `SwapperInstance.removeByID(ID)`
 
 
-#####removeByIndex
+#####.removeByIndex
 `SwapperInstance.removeByIndex(index)`
 
 
-#####selectByID
+#####.selectByID
 `SwapperInstance.selectByID(ID)`
 
 Set the current page to the one, already in the current set, with the `ID` provided as an argument and shows it (if the classes are defined properly).
@@ -180,7 +180,7 @@ Set the current page to the one, already in the current set, with the `ID` provi
 | String | `ID` | ID of the element already added to the current set that we want to show.
 
 
-#####selectByIndex
+#####.selectByIndex
 `SwapperInstance.selectByIndex(index)`
 
 Set the current page to the one in the `index`-nth position of the current set and shows it (if the classes are defined properly).
@@ -190,13 +190,13 @@ Set the current page to the one in the `index`-nth position of the current set a
 | Integer | `index` | Index of the element already added to the current set that we want to show.
 
 
-#####selectNone
+#####.selectNone
 `SwapperInstance.selectNone()`
 
 No arguments. It clears (set to null) the `currentIndex` so that we don't have any active element on the set. It will also hide the current element from the page (if the classes are defined properly).
 
 
-#####kill
+#####.kill
 `SwapperInstance.kill(id)`
 
 It will make the element that matches the `id` selector disappear (if the classes are defined properly), and will remove it from the DOM once the animation ends.
@@ -209,7 +209,7 @@ It will make the element that matches the `id` selector disappear (if the classe
 
 ####Button-Related Methods
 
-#####addButton
+#####.addButton
 `SwapperInstance.addButton(ID)`
 
 Add a new button to the current set that matches the `ID` selector. Take into account that you can't add more buttons than pages. If you try to do that, an error will be shown in the console (but not thrown) and the action will be aborted.
@@ -219,7 +219,7 @@ Add a new button to the current set that matches the `ID` selector. Take into ac
 | String | `ID` | ID of one button to add to the current set.
 
 
-#####addButtons
+#####.addButtons
 `SwapperInstance.addButtons(IDs)`
 
 Add to the current set all the buttons that match the `IDs` selectors. Take into account that you can't add more buttons than pages. If you try to do that, an error will be shown in the console (but not thrown) and the action will be aborted.
@@ -232,34 +232,34 @@ Add to the current set all the buttons that match the `IDs` selectors. Take into
 
 ####Callback-Related Methods
 
-#####setCallbackByID
+#####.setCallbackByID
 `SwapperInstance.setCallbackByID(ID, callback)`
 
 
-#####setCallbackByIndex
+#####.setCallbackByIndex
 `SwapperInstance.setCallbackByIndex(index, callback)`
 
 
-#####removeCallbackByID
+#####.removeCallbackByID
 `SwapperInstance.removeCallbackByID(ID)`
 
 
-#####removeCallbackByIndex
+#####.removeCallbackByIndex
 `SwapperInstance.removeCallbackByIndex(index)`
 
 
-#####enableCallbacks
+#####.enableCallbacks
 `SwapperInstance.enableCallbacks()`
 
 
-#####disableCallbacks
+#####.disableCallbacks
 `SwapperInstance.disableCallbacks()`
 
 
 
 ####DefaultPage-Related Methods
 
-#####setDefaultByID
+#####.setDefaultByID
 `SwapperInstance.setDefaultByID(ID)`
 
 Set the default page to the one, already in the current set, with the `ID` provided as an argument.
@@ -269,7 +269,7 @@ Set the default page to the one, already in the current set, with the `ID` provi
 | String | `ID` | ID of the element already added to the current set that we want to use as default.
 
 
-#####setDefaultByIndex
+#####.setDefaultByIndex
 `SwapperInstance.setDefaultByIndex(index)`
 
 Set the default page to the one in the `index`-nth position of the current set.
@@ -279,7 +279,7 @@ Set the default page to the one in the `index`-nth position of the current set.
 | Integer | `index` | Index of the element already added to the current set that we want to use as default.
 
 
-#####clearDefault
+#####.clearDefault
 `SwapperInstance.clearDefault()`
 
 No arguments. It clears (set to null) the `defaultIndex` so that we disable the default-index feature.
@@ -288,11 +288,11 @@ No arguments. It clears (set to null) the `defaultIndex` so that we disable the 
 
 ####Loader-Related Methods
 
-#####removeLoaderByID
+#####`.removeLoaderByID`
 `SwapperInstance.removeLoaderByID(ID)`
 
 
-#####removeLoaderByIndex
+#####`.removeLoaderByIndex`
 `SwapperInstance.removeLoaderByIndex(index)`
 
 
