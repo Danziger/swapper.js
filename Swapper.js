@@ -32,7 +32,8 @@
 				page: className (String),
 				pageButton: className (String),
 				currentPage: className (String),
-				currentButto": className (String),
+				currentButton: className (String),
+				loadingPage: className (String),
 				deadPage: className (String)
 			},
 			
@@ -46,7 +47,7 @@
 			callbacksEnabled: boolean,
 			
 			masterProperty: String of a CSS property
-		
+
 		} 
 		
 		*/
@@ -72,12 +73,12 @@
 		if(options.hasOwnProperty("classNames")) for(key in this.classNames) this.classNames[key] = options.classNames[key] || this.classNames[key];
 
 		// Load elements:
-		IDs = this.normalizeIDs(IDs, this.classNames.page);
+		IDs = this._normalizeIDs(IDs, this.classNames.page);
 		this.addPages(IDs);
 
 		// Load buttons, if required:
 		if(options.hasOwnProperty("buttonsIDs")){
-			IDs = this.normalizeIDs(options.buttonsIDs, this.classNames.pageButton);
+			IDs = this._normalizeIDs(options.buttonsIDs, this.classNames.pageButton);
 			this.addButtons(IDs);
 			
 			if(this.pagesIDs.length != this.pagesCount || this.pagesIDs.length != this.buttonsIDs.length || this.pagesDOM.length != this.buttonsDOM.length) // Check.
@@ -134,10 +135,21 @@
 			}
 		}
 	})();
+	
+	// ******************
+	
+	Swapper.prototype.classNames = {
+		"page":"page",
+		"pageButton":"pageButton",
+		"currentPage":"currentPage",
+		"currentButton":"currentButton",
+		"loadingPage":"loadingPage",
+		"deadPage":"deadPage"
+	};
 
 	// AUX. METHODS ////////////////////////////////////////////////////////////
 
-	Swapper.prototype.normalizeIDs=function(IDs, className) {
+	Swapper.prototype._normalizeIDs=function(IDs, className) {
 
 		if(typeof IDs === "string"){
 			if(IDs==="autoMODE"){ // Automatically seach for .page elements.
@@ -152,23 +164,13 @@
 			}
 			else IDs = [IDs]; // Just one element added.
 		}
+		else if(IDs == null || !IDs) IDs = [];
 		
 		if(Object.prototype.toString.call( IDs ) === "[object Array]")
 			return IDs;
 		else
 			throw "Swapper.js  - Invalid IDs.";	
 
-	};
-	
-	// ******************
-	
-	Swapper.prototype.classNames = {
-		"page":"page",
-		"pageButton":"pageButton",
-		"currentPage":"currentPage",
-		"currentButton":"currentButton",
-		"loadingPage":"loadingPage",
-		"deadPage":"deadPage"
 	};
 
 	// (PUBLIC) METHODS ////////////////////////////////////////////////////////
