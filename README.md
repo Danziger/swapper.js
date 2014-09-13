@@ -49,12 +49,12 @@ Creates a new instance of the Swapper class to manage all the _pages_ that match
 
 |         Type         |         Argument         | Description |
 |----------------------|--------------------------|-------------|
-| String / Array | `IDs` | Array of Strings of the IDs of the elements (_pages_) that should be shown and hidden. It can be a single String if there is only one ID. In that last case, there is a special value `"autoMODE"` (case sensitive) that will search for all elements in the current page with the page class (`.page` by default). If you want to create the object without any _pages_ just provide an **empty Array** or a falsy value (`0`, `null`,  `undefined`, `false`, ...). If any of the specified ids does not exist, an error will be shown in console (but not thrown).
+| String / Array | `IDs` | Array of Strings of the IDs of the elements (_pages_) that should be shown and hidden. It can be a single String if there is only one ID. In that last case, there is a special value `"autoMODE"` (case sensitive) that will search for all elements in the current page with the page class (`.page` by default). If you want to create the object without any _pages_ just provide an empty Array or a falsy value (`0`, `null`,  `undefined`, `false`, ...). If any of the specified ids does not exist, an error will be shown in console (but not thrown).
 | Integer | `currentIndex` | Index of the current element inside IDs range. It can be null if there's no page currently selected
 | Integer | `defaultIndex` | Index of the current element inside IDs range. It can be null if you don't need the default-page feature. The **default-page feature** will make you toggle between the current _page_ and the default _page_ everytime you try to select the current (already selected) page.
 | Object | `options` | All the options avaible are explained next.
 
-#### `options` argument:
+`options` argument:
 
 |      Type      |      key      | Description |
 |----------------|---------------|-------------|
@@ -64,6 +64,16 @@ Creates a new instance of the Swapper class to manage all the _pages_ that match
 | Object | `callbacks` | Object specifying the callbacks associated to each _page_ `id`. The key must be equal to the `id` or an error will be thrown. The value must be a function and will receive the event object as an unique argument when called.
 | Boolean | `callbacksEnabled` | `true` if you want to use the callbacks feature. `false` by default.
 | String | `masterProperty` | CSS property whose transition end indicates when to call the callbacks, if enabled. `opacity` by default. The property specified is not validated for now.
+
+###_normalizeIDs (aux. method)
+`SwapperInstance._normalizeIDs(IDs, className)`
+
+Returns the `IDs` parameter normalized as an Array of Strings (or an empty Array).
+
+|         Type         |         Argument         | Description |
+|----------------------|--------------------------|-------------|
+| Array | `IDs` | Array of Strings that should be normalized. It can be a single String if there is only one ID. In that last case, there is a special value `"autoMODE"` (case sensitive) that will search for all elements in the current page with the `className` class and collect their ids. An empty Array or a falsy value (`0`, `null`,  `undefined`, `false`, ...) will return an empty array. Other values will throw an error.
+| String | `className` | Class name to search elements whose ids to collect if `autoMODE` enabled.
 
 ###addPage
 `SwapperInstance.addPage(ID)`
@@ -83,6 +93,44 @@ Add to the current set all the _pages_ that match the `IDs` selectors.
 |         Type         |         Argument         | Description |
 |----------------------|--------------------------|-------------|
 | Array | `IDs` | Array of Strings of the IDs of the _pages_ to add to the current set. In this case, it can not be a single String and there is no special value to search the elements automatically.
+
+
+###addButton
+`SwapperInstance.addButton(ID)`
+
+Add a new button to the current set that matches the `ID` selector. Take into account that you can't add more buttons than pages. If you try to do that, an error will be shown in the console (but not thrown) and the action will be aborted.
+
+|         Type         |         Argument         | Description |
+|----------------------|--------------------------|-------------|
+| String | `ID` | ID of one button to add to the current set.
+
+
+###addButtons
+`SwapperInstance.addButtons(IDs)`
+
+Add to the current set all the buttons that match the `IDs` selectors. Take into account that you can't add more buttons than pages. If you try to do that, an error will be shown in the console (but not thrown) and the action will be aborted.
+
+|         Type         |         Argument         | Description |
+|----------------------|--------------------------|-------------|
+| Array | `IDs` | Array of Strings of the IDs of the buttons to add to the current set. In this case, it can not be a single String and there is no special value to search the elements automatically.
+
+
+
+###setCallbackByID
+`SwapperInstance.setCallbackByID(ID, callback)`
+
+###setCallbackByIndex
+`SwapperInstance.setCallbackByIndex(index, callback)`
+
+
+
+###removeCallbackByID
+`SwapperInstance.removeCallbackByID(ID)`
+
+###removeCallbackByIndex
+`SwapperInstance.removeCallbackByIndex(index)`
+
+
 
 ###setDefaultByID
 `SwapperInstance.setDefaultByID(ID)`
