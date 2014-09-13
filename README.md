@@ -28,28 +28,42 @@ And constructed with the following guidelines:
 Classes
 -------
 
-In order to make Swapper.js work as it is supposed to do so, you need to define the following classes with the specified behavior. The `classNames` attribute can be changed to use custom class names, but it will be changed **in the prototype**, so all instances of Swapper will be affected. You can change them using the `options` argument of the constructor. We will see that in detail later.
+In order to make Swapper.js work as it is supposed to do so, you need to define the following classes with the specified behavior. The `classNames` attribute can be changed to use custom class names, but it will be changed **in the prototype**, so all instances of `Swapper` will be affected. You can change them using the `options` argument of the constructor. We will see that in detail later.
 
- - `.page`: Nothing to do. This class will be used just to automatically find the elements you want to use as _pages_ in the DOM. The automatic selection will be explained next.
- - `.pageButton`:
- - `.currentPage`: This class will be used to mark the current _page_, so it must apply the proper CSS properties to make it show up. It can also use transitions to make the _pages_ appear and disappear nicely.
- - `currentButton`: 
- - `.deadPage`: This class is used to apply the same effects that `.currentPage` but just when a page dissapear. It will be used to fade away _pages_ that will be removed from the DOM once faded. Note that with the current implementation, the element will be removed when the `opacity` property's transition ends.
+ - `.page`: Nothing to do. This class will be used just to automatically find the elements you want to use as _pages_ in the DOM. The automatic selection will be explained later.
+ - `.pageButton`: Nothing to do. This class will be used just to automatically find the elements you want to use as buttons in the DOM. The automatic selection will be explained later.
+ - `.currentPage`: This class will be used to mark the current _page_, so it must apply the proper CSS properties to make it show up. You can also use transitions to make the _pages_ appear and disappear nicely and to trigger a `transitioEnd` event, that will call a callback when the chosen property's transition finish. You can set a `0s` transition on any property if you want the callback to be called immediately.
+ - `.currentButton`: This class will be used to mark the current _page_'s button, so it must apply the proper CSS properties to differentiate it from the rest.
+ - `.loadingPage`: This class is used to mark a _page_ as _loading_. You can use it to apply some CSS effects on it to show that, show a simple loader using pseudoelements or even a more elaborated one showing a bunch of HTML child elements over it.
+ - `.deadPage`: This class is used to apply the same effects that `.currentPage` but just when a page dissapear. It will be used to fade away _pages_ that will be removed from the DOM once the chosen property's transition finish
+
+By default, the CSS property whose transition end indicates when to call the callbacks is `opacity`. We will see how to change that, the class names and how to disable the callbacks next.
 
 Methods
 -------
 
 ###Swapper (constructor)
-`SwapperInstance = new Swapper(IDs, currentIndex, defaultIndex, anchorMode)`
+`SwapperInstance = new Swapper(IDs, currentIndex, defaultIndex, options)`
 
-Creates a new instance of the Swapper class to manage all the _pages_ that match the `IDs` selector/s. You can also specify the current one providing the `currentIndex` argument and the default one with the `defaultIndex` argument. The last argument indicates that you want to use the URL hash instead of classes to select the current _page_ when `True`.
+Creates a new instance of the Swapper class to manage all the _pages_ that match the `IDs` selector/s. You can also specify the current one providing the `currentIndex` argument and the default one with the `defaultIndex` argument. The last argument indicates some extra options that are not so commonly used.
 
 |         Type         |         Argument         | Description |
 |----------------------|--------------------------|-------------|
-| String / Array | `IDs` | Array of Strings of the IDs of the elements (_pages_) that should be shown and hidden. It can be a single String if there is only one ID. In that last case, there is a special value `"autoMODE"` (case sensitive) that will search for all elements in the current page with class `.pageMe`. If you want to create the object without any _pages_ just provide and **empty Array**. This argument can not be null.
+| String / Array | `IDs` | Array of Strings of the IDs of the elements (_pages_) that should be shown and hidden. It can be a single String if there is only one ID. In that last case, there is a special value `"autoMODE"` (case sensitive) that will search for all elements in the current page with the page class (`.page` by default). If you want to create the object without any _pages_ just provide an **empty Array** or a falsy value (`0`, `null`,  `undefined`, `false`, ...). If any of the specified ids does not exist, an error will be shown in console (but not thrown).
 | Integer | `currentIndex` | Index of the current element inside IDs range. It can be null if there's no page currently selected
 | Integer | `defaultIndex` | Index of the current element inside IDs range. It can be null if you don't need the default-page feature. The **default-page feature** will make you toggle between the current _page_ and the default _page_ everytime you try to select the current (already selected) page.
-| Boolean | `anchorMode` | `True` if you want to use the URL hash instead of classes to select the current _page_. `False` elsewhere.
+| Object | `options` | All the options avaible are explained next.
+
+#### `options` argument:
+
+|      Type      |      key      | Description |
+|----------------|---------------|-------------|
+| Boolean | `anchorMode` | `true` if you want to use the URL hash as well as classes to select the current _page_. `false` by default.
+| Object | `classNames` | Object specifying the class names to be used (the ones explained in the previous section). The possible keys-values to be set have the same name both for key and value (default class name), so as said before, they are: `page`, `pageButton`, `currentPage`, `currentButton`, `loadingPage` and `deadPage`. Different key-value pairs will be discarded when merged with the default ones. Take into account that the class names **won't be validated** in any way, so an empty string or other values will be accepted and that will probably cause the module to throw an error later. 
+| String / Array | `buttonsIDs` | Array of Strings of the IDs of the elements that should be used as buttons. It can be a single String if there is only one ID. In that last case, there is a special value `"autoMODE"` (case sensitive) that will search for all elements in the current page with the pageButton class (`.pageButton` by default). If you want to create the object without any buttons just provide an **empty Array** or a falsy value (`0`, `null`,  `undefined`, `false`, ...). If any of the specified ids does not exist, an error will be shown in console (but not thrown).
+| Object | `callbacks` | Object specifying the callbacks associated to each _page_ `id`. The key must be equal to the `id` or an error will be thrown. The value must be a function and will receive the event object as an unique argument when called.
+| Boolean | `callbacksEnabled` | `true` if you want to use the callbacks feature. `false` by default.
+| String | `masterProperty` | CSS property whose transition end indicates when to call the callbacks, if enabled. `opacity` by default. The property specified is not validated for now.
 
 ###addPage
 `SwapperInstance.addPage(ID)`
@@ -161,6 +175,6 @@ Object `SwapperInstance.classNames` / `Swapper.prototype.classNames = {defaultCl
 
 TO-DO
 -----
- - [ ] **PRELOAD CONTENT**: Add methods (or create a derivated class) to add the functionality to preload content using AJAX or iframes **before** the user requests it.
- - [ ] **PAGINATE AND CACHE CONTENT**: Add methods to _cache_ content that has already been requested by the user or preload (and _cache_) content that we think that will be requested later and manage it (set limits, decide which content to replace using LRU algorithm...).
- - [ ] **NAVIGATION**: Implement the methods needed to enable history and back/forward-button functionality.
+ - [ ] **Preload content**: Add methods (or create a derivated class) to add the functionality to preload content using AJAX or iframes **before** the user requests it.
+ - [ ] **Paginate and cache content**: Add methods to _cache_ content that has already been requested by the user or preload (and _cache_) content that we think that will be requested later and manage it (set limits, decide which content to replace using LRU algorithm...).
+ - [ ] **Navigation**: Implement the methods needed to enable history and back/forward-button functionality.
