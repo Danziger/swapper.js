@@ -7,7 +7,7 @@ A JS class to help you toggle the visibility of parts (_pages_) of your web proj
 
 
 
-Author and License
+AUTHOR AND LICENSE
 -------------------
 
 By Dani Gámez Franco, http://gmzcodes.com
@@ -18,7 +18,7 @@ Licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 
 
-Versioning
+VERSIONING
 ----------
 
 **CURRENT VERSION:** `2.0.0`
@@ -37,7 +37,7 @@ And constructed with the following guidelines:
 
 
 
-Classes
+CLASSES
 -------
 
 In order to make Swapper.js work as it is supposed to do so, you need to define the following classes with the specified behavior. The `classNames` attribute can be changed to use custom class names, but it will be changed **in the prototype**, so all instances of `Swapper` will be affected. You can change them using the `options` argument of the constructor. We will see that in detail later.
@@ -55,7 +55,7 @@ By default, the CSS property whose transition end indicates when to call the cal
 
 
 
-Attributes
+ATTRIBUTES
 ----------
 
 ###PUBLIC
@@ -94,7 +94,7 @@ Object `SwapperInstance.classNames` / `Swapper.prototype.classNames = {defaultCl
 
 
 
-Methods
+METHODS
 -------
 
 ###CONSTRUCTOR
