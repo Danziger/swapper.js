@@ -147,7 +147,7 @@
 		"deadPage":"deadPage"
 	};
 
-	// AUX. METHODS ////////////////////////////////////////////////////////////
+	// AUX. METHODS (PRIVATE) //////////////////////////////////////////////////
 
 	Swapper.prototype._normalizeIDs=function(IDs, className) {
 
@@ -173,8 +173,10 @@
 
 	};
 
-	// (PUBLIC) METHODS ////////////////////////////////////////////////////////
-
+	// PAGES METHODS ///////////////////////////////////////////////////////////
+	
+	// Add pages: **************************************************************
+	
 	Swapper.prototype.addPage=function(ID) {
 
 		if(this.pagesIDs.indexOf(ID)==-1){
@@ -202,161 +204,8 @@
 		for (var i=0, L=IDs.length; i<L; ++i)
 			this.addPage(IDs[i]);
 	};
-
-	// ******************
 	
-	Swapper.prototype.addButton=function(ID) {
-
-		if(this.buttonsIDs.indexOf(ID)==-1){
-			if(this.buttonsIDs.length < this.pagesCount){
-				
-				if(typeof ID == "string" && ID.length>0){
-					var element=document.getElementById(ID);
-					
-					if(element){
-						this.buttonsIDs[this.buttonsIDs.length] = ID;
-						this.buttonsDOM[this.buttonsDOM.length] = element;
-						return true;
-					}
-					else{
-						console.error("Swapper.js - No element with ID '"+ID+"' found.");
-					}
-				}
-				else{
-					this.buttonsIDs[this.buttonsIDs.length] = null;
-					this.buttonsDOM[this.buttonsDOM.length] = null;					
-				}
-			}
-			else{
-				console.error("Swapper.js - You can't add more buttons than pages. Add a page first.");
-			}
-		}
-		else{
-			console.error("Swapper.js - Button with ID '"+ID+"' already exists.");
-		}
-
-		return false;
-	};
-
-	Swapper.prototype.addButtons=function(IDs) {
-		for (var i=0, L=IDs.length; i<L; ++i)
-			this.addButton(IDs[i]);
-	};
-
-	// ******************
-	
-	// Add callbacks:
-	
-	Swapper.prototype.setCallbackByID=function(ID, callback) {
-		
-		if(this.pagesIDs.indexOf(ID)>-1){
-			if(callback == null) delete this.callbacks[ID];
-			else if(typeof callback == "function") this.callbacks[ID] = callback;
-			else throw "Swapper.js - Invalid callback.";
-		}
-		else throw "Swapper.js - Invalid ID.";
-		
-	};
-
-	Swapper.prototype.setCallbackByIndex=function(index, callback) {
-		if( typeof index == "number" && index >=0 & index < this.pagesCount)
-			this.setCallbackByID(this.pagesIDs[index], callback);
-		else console.error("Swapper.js - Invalid index.");
-	};
-	
-	// Remove callbacks:
-	
-	Swapper.prototype.removeCallbackByID=function(ID) {
-		if(this.pagesIDs.indexOf(ID)>-1) delete this.callbacks[ID];
-		else throw "Swapper.js - Invalid ID.";
-	};
-
-	Swapper.prototype.removeCallbackByIndex=function(index) {
-		if( typeof index == "number" && index >=0 & index < this.pagesCount)
-			this.removeCallbackByID(this.pagesIDs[index]);
-		else console.error("Swapper.js - Invalid index.");
-	};
-	
-	// ******************
-
-	Swapper.prototype.setDefaultByID=function(ID) {
-		var index = this.pagesIDs.indexOf(ID);
-		
-		if(index>-1) this.setDefaultByIndex(index);
-		else throw "Swapper.js - Invalid ID.";
-	};
-
-	Swapper.prototype.setDefaultByIndex=function(index) {
-		if(typeof index == "number" && this.pagesCount > 0)
-			this.defaultIndex = Math.max( Math.min(index, this.pagesCount-1), 0);
-		else
-			this.defaultIndex = null;
-	};
-
-	Swapper.prototype.clearDefault=function(){
-		this.defaultIndex = null;
-	};
-
-	// ******************
-
-	Swapper.prototype.selectByID=function(ID, loading) {
-		this.selectByIndex(this.pagesIDs.indexOf(ID));
-	};
-	
-	Swapper.prototype.selectByIndex=function(index, loading) {
-	
-		if( typeof index == "number" && index >=0 & index < this.pagesCount){
-		
-			// If there's a default element and we want to select the current one (already selected):
-			if(this.currentIndex == index && this.defaultIndex != null) index = this.defaultIndex;
-			
-			// Hide current page:
-			if(this.currentIndex >=0){
-				this.pagesDOM[this.currentIndex].classList.remove(this.classNames.currentPage);
-				if(this.buttonsDOM[this.currentIndex]) this.buttonsDOM[this.currentIndex].classList.remove(this.classNames.currentButton);
-			}
-
-			// Put loading cover if required:
-			if(loading===true) this.pagesDOM[index].classList.add(this.classNames.loadingPage);
-			else this.pagesDOM[index].classList.remove(this.classNames.loadingPage);
-			
-			// Show requested page:			
-			if(this.anchorMode) window.location.hash="#"+this.pagesIDs[index];
-
-			this.pagesDOM[index].classList.add(this.classNames.currentPage);
-			if(this.buttonsDOM[index]) this.buttonsDOM[index].classList.add(this.classNames.currentButton);
-			
-			this.currentIndex=index;
-		}
-		else console.error("Swapper.js - Invalid index.");
-	};
-	
-	// ******************
-	
-	Swapper.prototype.finishLoadingByID=function(ID) {
-		this.finishLoadingByIndex(this.pagesIDs.indexOf(ID));
-	};
-
-	Swapper.prototype.finishLoadingByIndex=function(index) {
-		if( typeof index == "number" && index >=0 & index < this.pagesCount)
-			this.pagesDOM[index].classList.remove(this.classNames.loadingPage);
-		else console.error("Swapper.js - Invalid index.");
-	};
-
-	// ******************
-
-	Swapper.prototype.selectNone=function() {
-		if(this.anchorMode) window.location.hash = "";
-
-		if(this.currentIndex >=0){
-			this.pagesDOM[this.currentIndex].classList.remove(this.classNames.currentPage);
-			if(this.buttonsDOM[this.currentIndex]) this.buttonsDOM[this.currentIndex].classList.remove(this.classNames.currentButton);
-		}
-		
-		this.currentIndex=null;
-	};
-
-	// ******************
+	// Remove pages: ***********************************************************
 	
 	Swapper.prototype.removeByID=function(ID) {
 		this.removeByIndex(this.pagesIDs.indexOf(ID));
@@ -404,8 +253,53 @@
 		}
 		else console.error("Swapper.js - Invalid index.");
 	};
+
+	// Select pages: ***********************************************************
 	
-	// ******************
+	Swapper.prototype.selectByID=function(ID, loading) {
+		this.selectByIndex(this.pagesIDs.indexOf(ID));
+	};
+	
+	Swapper.prototype.selectByIndex=function(index, loading) {
+	
+		if( typeof index == "number" && index >=0 & index < this.pagesCount){
+		
+			// If there's a default element and we want to select the current one (already selected):
+			if(this.currentIndex == index && this.defaultIndex != null) index = this.defaultIndex;
+			
+			// Hide current page:
+			if(this.currentIndex >=0){
+				this.pagesDOM[this.currentIndex].classList.remove(this.classNames.currentPage);
+				if(this.buttonsDOM[this.currentIndex]) this.buttonsDOM[this.currentIndex].classList.remove(this.classNames.currentButton);
+			}
+
+			// Put loading cover if required:
+			if(loading===true) this.pagesDOM[index].classList.add(this.classNames.loadingPage);
+			else this.pagesDOM[index].classList.remove(this.classNames.loadingPage);
+			
+			// Show requested page:			
+			if(this.anchorMode) window.location.hash="#"+this.pagesIDs[index];
+
+			this.pagesDOM[index].classList.add(this.classNames.currentPage);
+			if(this.buttonsDOM[index]) this.buttonsDOM[index].classList.add(this.classNames.currentButton);
+			
+			this.currentIndex=index;
+		}
+		else console.error("Swapper.js - Invalid index.");
+	};
+
+	Swapper.prototype.selectNone=function() {
+		if(this.anchorMode) window.location.hash = "";
+
+		if(this.currentIndex >=0){
+			this.pagesDOM[this.currentIndex].classList.remove(this.classNames.currentPage);
+			if(this.buttonsDOM[this.currentIndex]) this.buttonsDOM[this.currentIndex].classList.remove(this.classNames.currentButton);
+		}
+		
+		this.currentIndex=null;
+	};
+	
+	// Kill pages: *************************************************************
 	
 	Swapper.prototype.kill=function(id){ // Page DOM id, not private one.
 		var deadElement = document.getElementById(id);
@@ -420,7 +314,83 @@
 		}
 	};
 	
-	// ******************
+	// BUTTONS METHODS /////////////////////////////////////////////////////////
+	
+	// Add buttons: ************************************************************
+	
+	Swapper.prototype.addButton=function(ID) {
+
+		if(this.buttonsIDs.indexOf(ID)==-1){
+			if(this.buttonsIDs.length < this.pagesCount){
+				
+				if(typeof ID == "string" && ID.length>0){
+					var element=document.getElementById(ID);
+					
+					if(element){
+						this.buttonsIDs[this.buttonsIDs.length] = ID;
+						this.buttonsDOM[this.buttonsDOM.length] = element;
+						return true;
+					}
+					else{
+						console.error("Swapper.js - No element with ID '"+ID+"' found.");
+					}
+				}
+				else{
+					this.buttonsIDs[this.buttonsIDs.length] = null;
+					this.buttonsDOM[this.buttonsDOM.length] = null;					
+				}
+			}
+			else{
+				console.error("Swapper.js - You can't add more buttons than pages. Add a page first.");
+			}
+		}
+		else{
+			console.error("Swapper.js - Button with ID '"+ID+"' already exists.");
+		}
+
+		return false;
+	};
+
+	Swapper.prototype.addButtons=function(IDs) {
+		for (var i=0, L=IDs.length; i<L; ++i)
+			this.addButton(IDs[i]);
+	};
+	
+	// CALLBACKS METHODS ///////////////////////////////////////////////////////
+	
+	// Add callbacks: **********************************************************
+	
+	Swapper.prototype.setCallbackByID=function(ID, callback) {
+		
+		if(this.pagesIDs.indexOf(ID)>-1){
+			if(callback == null) delete this.callbacks[ID];
+			else if(typeof callback == "function") this.callbacks[ID] = callback;
+			else throw "Swapper.js - Invalid callback.";
+		}
+		else throw "Swapper.js - Invalid ID.";
+		
+	};
+
+	Swapper.prototype.setCallbackByIndex=function(index, callback) {
+		if( typeof index == "number" && index >=0 & index < this.pagesCount)
+			this.setCallbackByID(this.pagesIDs[index], callback);
+		else console.error("Swapper.js - Invalid index.");
+	};
+	
+	// Remove callbacks: *******************************************************
+	
+	Swapper.prototype.removeCallbackByID=function(ID) {
+		if(this.pagesIDs.indexOf(ID)>-1) delete this.callbacks[ID];
+		else throw "Swapper.js - Invalid ID.";
+	};
+
+	Swapper.prototype.removeCallbackByIndex=function(index) {
+		if( typeof index == "number" && index >=0 & index < this.pagesCount)
+			this.removeCallbackByID(this.pagesIDs[index]);
+		else console.error("Swapper.js - Invalid index.");
+	};
+
+	// Enable / Disable callbacks: *********************************************
 
 	Swapper.prototype.enableCallbacks=function(){
 		if(!this.callbacksEnabled) document.addEventListener(this.transitionEvent, this.transitionListener);		
@@ -429,8 +399,40 @@
 	Swapper.prototype.disableCallbacks=function(){
 		if(this.callbacksEnabled) document.removeEventListener(this.transitionEvent, this.transitionListener);		
 	};
+
+	// SET & CLEAR DEFAULT PAGE ////////////////////////////////////////////////
 	
-	// ******************
+	Swapper.prototype.setDefaultByID=function(ID) {
+		var index = this.pagesIDs.indexOf(ID);
+		
+		if(index>-1) this.setDefaultByIndex(index);
+		else throw "Swapper.js - Invalid ID.";
+	};
+
+	Swapper.prototype.setDefaultByIndex=function(index) {
+		if(typeof index == "number" && this.pagesCount > 0)
+			this.defaultIndex = Math.max( Math.min(index, this.pagesCount-1), 0);
+		else
+			this.defaultIndex = null;
+	};
+
+	Swapper.prototype.clearDefault=function(){
+		this.defaultIndex = null;
+	};
+
+	// LOADER METHODS //////////////////////////////////////////////////////////
+
+	Swapper.prototype.removeLoaderByID=function(ID) {
+		this.removeLoaderByIndex(this.pagesIDs.indexOf(ID));
+	};
+
+	Swapper.prototype.removeLoaderByIndex=function(index) {
+		if( typeof index == "number" && index >=0 & index < this.pagesCount)
+			this.pagesDOM[index].classList.remove(this.classNames.loadingPage);
+		else console.error("Swapper.js - Invalid index.");
+	};
+		
+	// *************************************************************************
 	
 	global.Swapper = Swapper;
 
