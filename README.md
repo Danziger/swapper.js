@@ -3,12 +3,17 @@ Swapper.js
 
 A JS class to help you toggle the visibility of parts (_pages_) of your web project.
 
-License
--------
+Author and License
+-------------------
+
+By Dani Gámez Franco, http://gmzcodes.com
+
 Licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 Versioning
 ----------
+
+**CURRENT VERSION:** `2.0.0`
 
 Swapper.js will be maintained under the [Semantic Versioning](http://semver.org) guidelines, so releases will be numbered with the following format when possible:
 
@@ -23,10 +28,12 @@ And constructed with the following guidelines:
 Classes
 -------
 
-In order to make Swapper.js work as it is supposed to do so, you need to define the following classes with the specified behavior.
+In order to make Swapper.js work as it is supposed to do so, you need to define the following classes with the specified behavior. The `classNames` attribute can be changed to use custom class names, but it will be changed **in the prototype**, so all instances of Swapper will be affected. You can change them using the `options` argument of the constructor. We will see that in detail later.
 
- - `.pageMe`: Nothing to do. This class will be used just to automatically find the elements you want to use as _pages_ in the DOM. The automatic selection will be explained next.
+ - `.page`: Nothing to do. This class will be used just to automatically find the elements you want to use as _pages_ in the DOM. The automatic selection will be explained next.
+ - `.pageButton`:
  - `.currentPage`: This class will be used to mark the current _page_, so it must apply the proper CSS properties to make it show up. It can also use transitions to make the _pages_ appear and disappear nicely.
+ - `currentButton`: 
  - `.deadPage`: This class is used to apply the same effects that `.currentPage` but just when a page dissapear. It will be used to fade away _pages_ that will be removed from the DOM once faded. Note that with the current implementation, the element will be removed when the `opacity` property's transition ends.
 
 Methods
@@ -119,14 +126,41 @@ It will make the element that matches the `id` selector disappear (if the classe
 | String | `id` | ID of **any** element on the DOM that we want to apply the `.deadPage` class, usually to fade it, and that will be removed after the animation ends. Note that if this element is also in the current set, it won't be removed from it.
 
 
-Attributes
-----------
+(Public) Attributes
+-------------------
 
-All attributes are public.
+###.pagesIDs
+Array of Strings `SwapperInstance.pagesIDs`
+
+###.pagesDOM
+Array of DOM elements `SwapperInstance.pagesDOM`
+
+###.buttonsIDs
+Array of Strings `SwapperInstance.buttonsIDs`
+
+###.buttonsDOM
+Array of DOM elements `SwapperInstance.buttonsDOM`
+
+###.callbacks
+Object `SwapperInstance.callbacks = {DOMelementID: function callback, ...}`
+
+###.callbacksEnabled
+Boolean `SwapperInstance.callbacksEnabled`
+
+###.pagesCount
+Integer `SwapperInstance.pagesCount`
+
+###.masterProperty
+String of CSS property `SwapperInstance.masterProperty`
+
+###.transitionEvent (in prototype)
+String of transition end event supported  `SwapperInstance.transitionEvent` / `Swapper.prototype.transitionEvent`
+
+###.classNames (in prototype)
+Object `SwapperInstance.classNames` / `Swapper.prototype.classNames = {defaultClassName: currentClassName, ...}`
 
 TO-DO
 -----
- - [ ] Add a callback to call on transition end (with option to use delegation).
- - [ ] Add a parameter to use or not requestAnimationFrame.
- - [ ] Use parameters instead of strings for the classes used by swapper.js and add functions to change them programmatically (?).
- - [ ] Add a method to remove elements from the set.
+ - [ ] **PRELOAD CONTENT**: Add methods (or create a derivated class) to add the functionality to preload content using AJAX or iframes **before** the user requests it.
+ - [ ] **PAGINATE AND CACHE CONTENT**: Add methods to _cache_ content that has already been requested by the user or preload (and _cache_) content that we think that will be requested later and manage it (set limits, decide which content to replace using LRU algorithm...).
+ - [ ] **NAVIGATION**: Implement the methods needed to enable history and back/forward-button functionality.
