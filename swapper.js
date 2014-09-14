@@ -117,7 +117,8 @@
 
 	// PROTOTYPE VARIABLES /////////////////////////////////////////////////////
 
-	// Set transitionEvent property in the prototype. Code from Modernizr:
+	// Set transitionEvent property in the prototype. Code from Modernizr: *****
+
 	Swapper.prototype.transitionEvent = (function(){
 		"use strict";
 		var t;
@@ -136,8 +137,8 @@
 		}
 	})();
 	
-	// ******************
-	
+	// ClassNames: *************************************************************
+
 	Swapper.prototype.classNames = {
 		"page":"page",
 		"pageButton":"pageButton",
