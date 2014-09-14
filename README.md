@@ -31,7 +31,7 @@ And constructed with the following guidelines:
 
 1. Breaking backward compatibility bumps the `MAJOR` (and resets the minor and patch).
 2. Adding functionality without breaking backward compatibility bumps the `MINOR` (and resets the patch).
-3. Bug fixes and misc changes bumps the `PATCH`.
+3. Bug fixes and misc. changes bumps the `PATCH`.
 
 
 
@@ -43,15 +43,24 @@ Classes
 In order to make swapper.js work as it is supposed to, you need to define the following classes with the specified behavior. The `classNames` attribute can be changed to use custom class names, but it will be updated **in the prototype**, so all the instances of `Swapper` will be affected. You can change it using the `options` argument of the constructor. We will see that in detail later.
 
  - `.page`: Nothing to do. This class will be used just to automatically find the elements you want to use as _pages_ in the DOM. The automatic selection will be explained later.
- - `.pageButton`: Nothing to do. This class will be used just to automatically find the elements you want to use as buttons in the DOM. The automatic selection will be explained later.
- - `.currentPage`: This class will be used to mark the current _page_, so it must apply the proper CSS properties to make it show up. You can also use transitions to make the _pages_ appear and disappear nicely and to trigger a `transitioEnd` event, that will call a callback when the chosen property's transition finish. You can set a `0s` transition on any property if you want the callback to be called immediately.
- - `.currentButton`: This class will be used to mark the current _page_'s button, so it must apply the proper CSS properties to differentiate it from the rest.
- - `.loadingPage`: This class is used to mark a _page_ as _loading_. You can use it to apply some CSS effects on it to show that, show a simple loader using pseudoelements or even a more elaborated one showing a bunch of HTML child elements over it.
- - `.deadPage`: This class is used to apply the same effects that `.currentPage` but just when a page dissapear. It will be used to fade away _pages_ that will be removed from the DOM once the chosen property's transition finish.
+ - `.pageButton`: Same as `.page` but for buttons.
+ - `.currentPage`: This class will be used to mark the current _page_, so it must apply the proper CSS properties to make it show up. You can also use transitions to make the _pages_ appear and disappear nicely and to trigger a `transitioEnd` event, that will call a callback when the chosen property's transition finish. You can set a `0s` transition on any property if you want the callback to be called immediately. We will see that in detail later.
+ - `.currentButton`: This class will be used to mark the current _page_'s button (when provided), so it must apply the proper CSS properties to differentiate it from the rest.
+ - `.loadingPage`: This class is used to mark a _page_ as _loading_. You can use it to apply some CSS effects on it to show that (show a simple loader using pseudoelements or even a more elaborated one showing a bunch of HTML child elements over it).
+ - `.deadPage`: This class is used to apply the same or similar effects that `.currentPage` but it will be used to fade away _pages_ that will be removed from the DOM once the chosen property's transition finish.
 
 By default, the CSS property whose transition end indicates when to call the callbacks is `opacity`. We will see how to change that, the class names and how to disable the callbacks next.
 
 Check the examples for a better idea on what these classes should do.
+
+
+
+
+
+Examples
+--------
+
+None for the moment. They will be here soon.
 
 
 
