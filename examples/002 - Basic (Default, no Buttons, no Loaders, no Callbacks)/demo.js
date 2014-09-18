@@ -5,7 +5,7 @@
 	 *	swapper.js:
 	 *	A JS class to help you toggle the visibility of parts of your web project.
 	 *
-	 *	By Dani GÃ¡mez Franco, http://gmzcodes.com
+	 *	By Dani Gámez Franco, http://gmzcodes.com
 	 *	Licensed under MIT.
 	 *
 	 *	Version: 2.1.1
@@ -448,3 +448,25 @@
 	global.Swapper = Swapper;
 
 }(window));
+
+
+
+
+
+var swapper; // Global so that you can use the console inspector on it.
+
+window.onload =function(e){
+	// You can use any of this two declarations:
+	//swapper = new Swapper("autoMODE", 0, 3);
+	swapper = new Swapper(["page1","page2","page3","page4"], 0, 3);
+	
+	document.onclick = function(e){ // Delegated.
+	
+		if(e.target.nodeName == "LI"){ // If we clicked on the desired element:
+			// You can use any of this two methods:
+			//swapper.selectByIndex(parseInt(e.target.getAttribute("data-index")));
+			swapper.selectByID(e.target.getAttribute("data-id"));
+		}
+		
+	};
+};
