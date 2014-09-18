@@ -60,7 +60,7 @@ Check the examples for a better idea on what these classes should do.
 Examples
 --------
 
-None for the moment. They will be here soon.
+There are 6 examples in the `examples` folder that goes from a very basic one to others that use more features so that you can easily understand how they all work. All the examples are ready to run on JSFiddle, so I will post here the links ASAP.
 
 
 
