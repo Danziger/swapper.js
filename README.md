@@ -376,6 +376,12 @@ If the `index` argument is not of `number` type or it's out of bounds, an error 
 | String | `index` | ID of the _page_ we want to remove the loader to.
 
 
+#####removeAllLoaders
+`SwapperInstance.removeAllLoaders()`
+
+Removes the loader class from all the _pages_ in the current set.
+
+
 
 
 
