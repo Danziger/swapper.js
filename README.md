@@ -60,7 +60,14 @@ Check the examples for a better idea on what these classes should do.
 Examples
 --------
 
-There are 6 examples in the `examples` folder that goes from a very basic one to others that use more features so that you can easily understand how they all work. All the examples are ready to run on JSFiddle, so I will post here the links ASAP.
+There are 6 examples in the `examples` folder that goes from a very basic one to others that use more features so that you can easily understand how they all work. All the examples are ready to run on JSFiddle:
+
+ - http://jsfiddle.net/gh/get/library/pure/Danziger/swapper.js/tree/master/examples/Demo_1
+ - http://jsfiddle.net/gh/get/library/pure/Danziger/swapper.js/tree/master/examples/Demo_2
+ - http://jsfiddle.net/gh/get/library/pure/Danziger/swapper.js/tree/master/examples/Demo_3
+ - http://jsfiddle.net/gh/get/library/pure/Danziger/swapper.js/tree/master/examples/Demo_4
+ - http://jsfiddle.net/gh/get/library/pure/Danziger/swapper.js/tree/master/examples/Demo_5
+ - http://jsfiddle.net/gh/get/library/pure/Danziger/swapper.js/tree/master/examples/Demo_6
 
 
 
