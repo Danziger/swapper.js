@@ -1,0 +1,9 @@
+---
+ name: Basic swapper.js example with default feature
+ description: Example with basic functionality and default feature. No buttons, loaders or callbacks features used.
+ authors:
+   - Dani Gámez Franco
+ resources:
+   - https://github.com/Danziger/swapper.js/tree/master/examples
+ normalize_css: no
+ ...
