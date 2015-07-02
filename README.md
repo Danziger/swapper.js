@@ -23,7 +23,7 @@ Versioning
 
 **CURRENT VERSION:** `2.0.0`
 
-Swapper.js will be maintained under the [Semantic Versioning](http://semver.org) guidelines, so releases will be numbered with the following format when possible:
+`swapper.js` will be maintained under the [Semantic Versioning](http://semver.org) guidelines, so releases will be numbered with the following format when possible:
 
 `MAJOR.MINOR.PATCH`
 
