@@ -397,3 +397,4 @@ TO-DO
  - [ ] **Preload content**: Add methods (or create a derivated class) to add the functionality to preload content using AJAX or iframes **before** the user requests it.
  - [ ] **Paginate and cache content**: Add methods to _cache_ content that has already been requested by the user or preload (and _cache_) content that we think that will be requested later and manage it (set limits, decide which content to replace using LRU algorithm...).
  - [ ] **Navigation**: Implement the methods needed to enable history and back/forward-button functionality.
+ - [ ] **Set buttons `data-` attributes when added**.
